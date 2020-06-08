@@ -1,14 +1,18 @@
 package scene.modules;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import scene.SignUpFrame;
 import utitlity.Constants;
 
 public class logInInputField extends JPanel{
@@ -22,7 +26,7 @@ public class logInInputField extends JPanel{
 	public JButton searchByPassword;
 	public JButton AccountCreation;
 	
-	public logInInputField() {
+	public logInInputField(SignUpFrame flame) {
 		
 		
 		setLayout(null);
@@ -43,7 +47,7 @@ public class logInInputField extends JPanel{
 		inputPassword.setEchoChar ((char) 0);
 		inputPassword.setText("비밀번호를 입력하세요");
 		
-		
+		//이벤트 처리
 		inputID.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {				
@@ -76,7 +80,14 @@ public class logInInputField extends JPanel{
 			
 		});
 		
-		
+		AccountCreation.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//JButton button = (JButton)e.getSource();
+				flame.change("SignUp");
+			}
+			
+		});
 		//포커스시 안내말풍선 생성
 		
 		inputID.setToolTipText("아이디를 입력하세요");
