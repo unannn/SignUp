@@ -15,13 +15,12 @@ import utitlity.Constants;
 public class LogIn extends JPanel {
 
 	private JLabel title;
-	private scene.modules.logInInputField inputField;
+	private scene.modules.LogInInputField inputField;
 
 	public LogIn(SignUpFrame flame) {
 		title = new JLabel(Constants.TOP_TITLE);
-		inputField = new scene.modules.logInInputField(flame);
-		setLayout(new BorderLayout());
-		
+		inputField = new scene.modules.LogInInputField(flame);
+		setLayout(new BorderLayout());		
 		
 		//타이틀 이펙트
 		title.addMouseListener(new MouseAdapter() {

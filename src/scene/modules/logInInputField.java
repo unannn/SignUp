@@ -7,7 +7,7 @@ import javax.swing.*;
 import scene.SignUpFrame;
 import utitlity.Constants;
 
-public class logInInputField extends JPanel{
+public class LogInInputField extends JPanel{
 	
 	public JTextField inputID;
 	public JPasswordField inputPassword;
@@ -18,7 +18,7 @@ public class logInInputField extends JPanel{
 	public JButton searchByPassword;
 	public JButton AccountCreation;
 	
-	public logInInputField(SignUpFrame flame) {		
+	public LogInInputField(SignUpFrame frame) {		
 		
 		setLayout(null);
 		//아이디와 비밀번호, 로그인 버튼 생성
@@ -75,10 +75,24 @@ public class logInInputField extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//JButton button = (JButton)e.getSource();
-				flame.change("SignUp");
+				frame.change("SignUp");
 			}
 			
 		});
+		
+		logInButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				boolean canLogIn = Database.getInstance().findIdAndPassword(inputID.getText(), inputPassword.getText().toString());
+				if(canLogIn) {
+					frame.change("LogInScene");
+				}
+				else {
+					frame.change("LogIn");
+				}
+			}			
+		});
+		
 		//포커스시 안내말풍선 생성
 		
 		inputID.setToolTipText("아이디를 입력하세요");

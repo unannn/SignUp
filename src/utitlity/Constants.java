@@ -4,7 +4,8 @@ import javax.swing.ImageIcon;
 
 public class Constants {
 	public static final ImageIcon TOP_TITLE = new ImageIcon("src/title.png");
-	
+	public static final ImageIcon WELCOME = new ImageIcon("src/welcome.png");
+
 	//·Î±×ÀÎ
 	public static final int COMPONENT_WIDTH = 350;
 	public static final int COMPONENT_HEIGHT = 40;
