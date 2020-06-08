@@ -13,10 +13,12 @@ import utitlity.Constants;
 //회원가입
 public class SignUp extends JPanel {
 	
-	JLabel title;
+	private JLabel title;
+	private scene.modules.AccountCreationField inputField;
+	
 	public SignUp(SignUpFrame flame) {
 		title = new JLabel(Constants.TOP_TITLE);
-		//inputField =  new scene.modules.logInInputField(flame);
+		inputField =  new scene.modules.AccountCreationField(flame);
 		setLayout(new BorderLayout());		
 		
 		//타이틀 이펙트
@@ -40,6 +42,6 @@ public class SignUp extends JPanel {
 		this.setBackground(new Color(181, 230, 29));
 
 		add(title,BorderLayout.BEFORE_FIRST_LINE);
-		 //add(inputField,BorderLayout.CENTER);	
+		 add(inputField,BorderLayout.CENTER);	
 	}
 }

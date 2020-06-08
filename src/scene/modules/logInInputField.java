@@ -1,17 +1,9 @@
 package scene.modules;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 import scene.SignUpFrame;
 import utitlity.Constants;
 
@@ -26,8 +18,7 @@ public class logInInputField extends JPanel{
 	public JButton searchByPassword;
 	public JButton AccountCreation;
 	
-	public logInInputField(SignUpFrame flame) {
-		
+	public logInInputField(SignUpFrame flame) {		
 		
 		setLayout(null);
 		//아이디와 비밀번호, 로그인 버튼 생성
