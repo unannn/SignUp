@@ -2,6 +2,7 @@ package scene;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ public class LogIn extends JPanel{
 		 this.setBackground(new Color(181,230,29));
 		 
 		 add(title,BorderLayout.BEFORE_FIRST_LINE);
-		 add(inputField,BorderLayout.CENTER);
+		 add(inputField,BorderLayout.CENTER);		
+
 	}
 }
