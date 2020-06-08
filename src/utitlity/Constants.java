@@ -18,4 +18,10 @@ public class Constants {
 	public static final int ACCOUNTINPUT_X = 80;
 	public static final int ACCOUNTINPUT_Y = 0;
 	public static final int ACCOUNTINPUT_GAP = 35;
+	
+	//글자수제한
+	public static final int ID_LIMIT = 20;
+	public static final int PASSWORD_LIMIT = 20;
+
+
 }

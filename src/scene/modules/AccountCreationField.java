@@ -1,9 +1,17 @@
 package scene.modules;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import scene.SignUpFrame;
 import utitlity.Constants;
 
@@ -65,7 +73,7 @@ public class AccountCreationField extends JPanel {
 		
 		this.setBackground(new Color(181,230,29));
 		
-		
+		//좌표설정
 		locateComponent(id,0);
 		locateComponent(inputID,1);
 		
@@ -87,8 +95,17 @@ public class AccountCreationField extends JPanel {
 		locateComponent(adress,12);
 		locateComponent(InputAdress,13);
 		
-		locateComponent(CreationButton,14);
+		locateComponent(CreationButton,15);
+		
+		//글자수 제한
+		limitCharcaterNumber(inputID,Constants.ID_LIMIT);
+		limitCharcaterNumber(inputPassword,Constants.PASSWORD_LIMIT);
+		limitCharcaterNumber(inputPasswordConfirm,Constants.PASSWORD_LIMIT);
+		limitCharcaterNumber(inputPhonNumber,11);
+		limitCharcaterNumber(inputEmail,40);		
+		limitCharcaterNumber(InputAdress,40);
 
+		
 		add(id);
 		add(inputID);		
 		add(password);
@@ -103,6 +120,7 @@ public class AccountCreationField extends JPanel {
 		add(socialSecurityNumber);
 		add(adress);
 		add(InputAdress);		
+		
 		add(CreationButton);
 	}
 	
@@ -116,9 +134,11 @@ public class AccountCreationField extends JPanel {
 		sex = new JTextField(2);
 		securityNumber  = new JLabel("●●●●●●●");
 		
+		limitCharcaterNumber(birth,6);
+		limitCharcaterNumber(sex,1);
+		
 		socialSecurityNumber.setBackground(new Color(181,230,29));
-		
-		
+				
 		birth.setSize(0, 80);
 		
 		socialSecurityNumber.add(birth);
@@ -130,4 +150,13 @@ public class AccountCreationField extends JPanel {
 	private void locateComponent(Component component, int order) {
 		component.setBounds(Constants.ACCOUNTINPUT_X,Constants.ACCOUNTINPUT_Y + order*Constants.ACCOUNTINPUT_GAP,Constants.ACCOUNTINPUT_WIDTH, Constants.ACCOUNTINPUT_HEIGHT);
 	}
+	
+	private void limitCharcaterNumber(JTextField field,int limit) {
+		field.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				JTextField src = (JTextField)e.getSource();
+				if(src.getText().length() >= limit) e.consume();
+			}
+		});
+	}	
 }

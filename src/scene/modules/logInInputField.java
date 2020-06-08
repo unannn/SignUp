@@ -99,13 +99,24 @@ public class logInInputField extends JPanel{
 		inputPassword.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y + Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
 		logInButton.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  + 2*Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
 		serchingAndCreatingAccount.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  +3*Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
-				
+			
+		
+		//글자수 제한		
+		limitCharcaterNumber(inputID,Constants.ID_LIMIT);
+		limitCharcaterNumber(inputPassword,Constants.PASSWORD_LIMIT);
 		
 		add(inputID);
 		add(inputPassword);
 		add(logInButton);
 		add(serchingAndCreatingAccount);
-
 	}
 	
+	private void limitCharcaterNumber(JTextField field,int limit) {
+		field.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				JTextField src = (JTextField)e.getSource();
+				if(src.getText().length() >= limit) e.consume();
+			}
+		});
+	}	
 }
