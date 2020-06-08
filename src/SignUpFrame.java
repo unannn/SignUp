@@ -15,12 +15,11 @@ public class SignUpFrame extends JFrame {
 		setLayout(new BorderLayout());
 				
 		add(logIn,BorderLayout.CENTER);
-		//add(displayPanel,BorderLayout.BEFORE_FIRST_LINE);
-		//add(buttonPanel,BorderLayout.CENTER);
+		
 	
 		setVisible(true);
 		setSize(new Dimension(540,800));
-		//this.setMinimumSize(new Dimension(Constants.INIT_FRAME_WIDTH,Constants.INIT_FRAME_HEIGHT));
+		this.setMinimumSize(new Dimension(540,800));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 }

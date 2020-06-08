@@ -21,6 +21,8 @@ public class LogIn extends JPanel{
 
 		 this.setBackground(new Color(181,230,29));
 		 
+		 this.requestFocusInWindow(true);
+		 
 		 add(title,BorderLayout.BEFORE_FIRST_LINE);
 		 add(inputField,BorderLayout.CENTER);		
 

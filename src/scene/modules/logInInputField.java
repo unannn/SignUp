@@ -1,11 +1,11 @@
 package scene.modules;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -14,7 +14,7 @@ import utitlity.Constants;
 public class logInInputField extends JPanel{
 	
 	public JTextField inputID;
-	public JTextField inputPassword;
+	public JPasswordField inputPassword;
 	public JButton logInButton;
 	
 	public JPanel serchingAndCreatingAccount;
@@ -28,7 +28,7 @@ public class logInInputField extends JPanel{
 		setLayout(null);
 		//아이디와 비밀번호, 로그인 버튼 생성
 		inputID = new JTextField("아이디를 입력하세요");
-		inputPassword = new JTextField("비밀번호를 입력하세요");
+		inputPassword = new JPasswordField();
 		logInButton = new JButton("로그인");
 		
 		
@@ -37,6 +37,12 @@ public class logInInputField extends JPanel{
 		searchByID = new JButton("아이디로 찾기");
 		searchByPassword = new JButton("비밀번호로 찾기");
 		AccountCreation = new JButton("회원가입");	
+		
+	    //PasswordField 고스트 텍스트 생성
+		char passwordChar = inputPassword.getEchoChar();
+		inputPassword.setEchoChar ((char) 0);
+		inputPassword.setText("비밀번호를 입력하세요");
+		
 		
 		inputID.addFocusListener(new FocusListener() {
 			@Override
@@ -53,16 +59,28 @@ public class logInInputField extends JPanel{
 		
 		inputPassword.addFocusListener(new FocusListener() {
 			@Override
-			public void focusGained(FocusEvent e) {				
-				if(inputPassword.getText().equals("비밀번호를 입력하세요"))inputPassword.setText("");
+			public void focusGained(FocusEvent e) {
+				if(inputPassword.getText().equals("비밀번호를 입력하세요")) {
+					inputPassword.setText("");
+					inputPassword.setEchoChar(passwordChar);
+				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(inputPassword.getText().equals("")) inputPassword.setText("비밀번호를 입력하세요");
+				if(inputPassword.getText().equals("")) {
+					inputPassword.setEchoChar ((char) 0);
+					inputPassword.setText("비밀번호를 입력하세요");
+				}
 			}
 			
 		});
+		
+		
+		//포커스시 안내말풍선 생성
+		
+		inputID.setToolTipText("아이디를 입력하세요");
+		inputPassword.setToolTipText("비밀번호를 입력하세요");
 		
 		
 		//패널 설정
