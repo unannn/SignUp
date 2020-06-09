@@ -65,11 +65,11 @@ public class AccountCreationField extends JPanel {
 		
 		id = new JLabel("아이디(영문숫자로 2~20자)");
 		inputID = new JTextField();
-		idError = new JLabel("a ");
+		idError = new JLabel(" ");
 		
 		password = new JLabel("비밀번호(영문숫자로 2~20자) ");
 		inputPassword = new JPasswordField();
-		passwordError = new JLabel("a ");
+		passwordError = new JLabel(" ");
 
 		passwordConfirm = new JLabel("비밀번호 확인");
 		inputPasswordConfirm = new JPasswordField();
@@ -77,18 +77,18 @@ public class AccountCreationField extends JPanel {
 		
 		phoneNumber  = new JLabel("휴대폰 번호('-'없이)");
 		inputPhoneNumber = new JTextField();
-		phoneNumberError = new JLabel("a ");
+		phoneNumberError = new JLabel(" ");
 		
 		email  = new JLabel("이메일");
 		inputEmail = new JTextField();
 		
 		initializeSocialSecurityNumber();
 		socialNumber = new JLabel("주민번호");
-		securityNumberError = new JLabel("a ");
+		securityNumberError = new JLabel(" ");
 		
 		adress  = new JLabel("주소(●●시 ●●구 ●●●)");
 		InputAdress = new JTextField();
-		adressError = new JLabel("a ");
+		adressError = new JLabel(" ");
 		
 		CreationButton = new JButton("회원가입");
 		
@@ -134,7 +134,6 @@ public class AccountCreationField extends JPanel {
 		limitCharcaterNumber(inputEmail,40);		
 		limitCharcaterNumber(InputAdress,40);
 
-		
 		add(id);
 		add(inputID);		
 		add(password);
@@ -168,8 +167,15 @@ public class AccountCreationField extends JPanel {
 					paaswordConfirmError.setText(" ");
 					
 					if(inputID.getText().matches(pattern) && inputID.getText().length() >= 2) {
-						_id = inputID.getText();
-						idError.setText(" ");
+						if(!Database.getInstance().searchSameData("id", inputID.getText())) {
+							_id = inputID.getText();
+							idError.setText(" ");
+						}
+						else {
+							_id = null;
+							idError.setForeground(Color.RED);
+							idError.setText("이미 같은 아이디가 존재합니다");
+						}						
 					}
 					else {
 						_id = null;
@@ -186,10 +192,17 @@ public class AccountCreationField extends JPanel {
 						passwordError.setForeground(Color.RED);
 						passwordError.setText("다시입력해주세요");
 					}
-					
-					if(inputPhoneNumber.getText().matches("[0-9]") && inputPhoneNumber.getText().length() == 11) {
-						_phoneNumber = inputPhoneNumber.getText();
-						phoneNumberError.setText(" ");
+					System.out.println(inputPhoneNumber.getText().matches("[0-9]{11}") +" "+ (inputPhoneNumber.getText().length() == 11));
+					if(inputPhoneNumber.getText().matches("[0-9]{11}") && inputPhoneNumber.getText().length() == 11) {
+						if(!Database.getInstance().searchSameData("phonenumber", inputPhoneNumber.getText())) {
+							_phoneNumber = inputPhoneNumber.getText();
+							phoneNumberError.setText(" ");
+						}
+						else {
+							_phoneNumber = null;
+							phoneNumberError.setForeground(Color.RED);
+							phoneNumberError.setText("등록된 번호가 존재 합니다");		
+						}						
 					}
 					else {
 						_phoneNumber = null;

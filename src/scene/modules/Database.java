@@ -181,8 +181,50 @@ public class Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return null;
+		return null;	
+	}
 	
+	public boolean searchSameData(String element,String string){
+		try {
+			Connection connection = null;
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+
+			java.sql.Statement statement = null;
+
+			ResultSet resultSet = null;
+
+			statement = connection.createStatement();
+
+			statement.execute("USE signup");
+			
+			resultSet = statement.executeQuery("select id from account where "+element+" ='" +string+"'");
+
+			if (statement.execute("select id from account where "+element+" ='" +string+"'")) {
+
+				resultSet = statement.getResultSet();
+								
+				int count = 0;
+				
+				while(resultSet.next()) {
+					count++;
+				}
+				if(count > 0) return true;
+				else return false;
+			}
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());
+
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;	
 	}
 }
