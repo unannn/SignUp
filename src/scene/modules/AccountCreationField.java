@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import scene.SignUpFrame;
 import utitlity.Constants;
 
+import java.util.regex.*;
+
 public class AccountCreationField extends JPanel {
 	
 	public JLabel id;
@@ -46,7 +48,13 @@ public class AccountCreationField extends JPanel {
 	public String _birth;
 	public String _sex;
 	public String _adress;
-
+	
+	public JLabel idError;
+	public JLabel passwordError;
+	public JLabel paaswordConfirmError;
+	public JLabel phoneNumberError;
+	public JLabel securityNumberError;
+	public JLabel adressError;
 	
 	
 	public JButton CreationButton;
@@ -55,26 +63,32 @@ public class AccountCreationField extends JPanel {
 		
 		setLayout(null);
 		
-		id = new JLabel("æ∆¿Ãµ ");
+		id = new JLabel("æ∆¿Ãµ(øµπÆº˝¿⁄∑Œ 2~20¿⁄)");
 		inputID = new JTextField();
+		idError = new JLabel("a ");
 		
-		password = new JLabel("∫Òπ–π¯»£ ");
+		password = new JLabel("∫Òπ–π¯»£(øµπÆº˝¿⁄∑Œ 2~20¿⁄) ");
 		inputPassword = new JPasswordField();
-		
+		passwordError = new JLabel("a ");
+
 		passwordConfirm = new JLabel("∫Òπ–π¯»£ »Æ¿Œ");
 		inputPasswordConfirm = new JPasswordField();
+		paaswordConfirmError = new JLabel("a ");
 		
-		phoneNumber  = new JLabel("»ﬁ¥Î∆˘ π¯»£");
+		phoneNumber  = new JLabel("»ﬁ¥Î∆˘ π¯»£('-'æ¯¿Ã)");
 		inputPhoneNumber = new JTextField();
+		phoneNumberError = new JLabel("a ");
 		
 		email  = new JLabel("¿Ã∏ﬁ¿œ");
 		inputEmail = new JTextField();
 		
 		initializeSocialSecurityNumber();
 		socialNumber = new JLabel("¡÷πŒπ¯»£");
+		securityNumberError = new JLabel("a ");
 		
-		adress  = new JLabel("¡÷º“");
+		adress  = new JLabel("¡÷º“(°‹°‹Ω√ °‹°‹±∏ °‹°‹°‹)");
 		InputAdress = new JTextField();
+		adressError = new JLabel("a ");
 		
 		CreationButton = new JButton("»∏ø¯∞°¿‘");
 		
@@ -104,6 +118,14 @@ public class AccountCreationField extends JPanel {
 		
 		locateComponent(CreationButton,15);
 		
+		idError.setBounds(250, Constants.ACCOUNTINPUT_Y + 0*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		passwordError.setBounds(260, Constants.ACCOUNTINPUT_Y + 2*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		paaswordConfirmError.setBounds(170, Constants.ACCOUNTINPUT_Y + 4*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		phoneNumberError.setBounds(210, Constants.ACCOUNTINPUT_Y + 6*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		securityNumberError.setBounds(140, Constants.ACCOUNTINPUT_Y + 10*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		adressError.setBounds(250, Constants.ACCOUNTINPUT_Y + 12*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		
+		
 		//±€¿⁄ºˆ ¡¶«—
 		limitCharcaterNumber(inputID,Constants.ID_LIMIT);
 		limitCharcaterNumber(inputPassword,Constants.PASSWORD_LIMIT);
@@ -130,21 +152,90 @@ public class AccountCreationField extends JPanel {
 		
 		add(CreationButton);
 		
+		add(idError);
+		add(passwordError);
+		add(phoneNumberError);
+		add(securityNumberError);
+		add(adressError);
+		add(paaswordConfirmError);
+		
 		CreationButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println( inputPassword.getText() +" "+ inputPasswordConfirm.getText());
+				String pattern = "[0-9a-zA-Z]{2,20}";
 				if(inputPassword.getText().contentEquals(inputPasswordConfirm.getText())) {
-					_id = inputID.getText();
-					_password = inputPassword.getText();
-					_phoneNumber = inputPhoneNumber.getText();
+					paaswordConfirmError.setText(" ");
+					
+					if(inputID.getText().matches(pattern) && inputID.getText().length() >= 2) {
+						_id = inputID.getText();
+						idError.setText(" ");
+					}
+					else {
+						_id = null;
+						idError.setForeground(Color.RED);
+						idError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");
+					}
+					
+					if(inputPassword.getText().matches(pattern) && inputPassword.getText().length() >= 2) {
+						_password = inputPassword.getText();
+						passwordError.setText(" ");
+					}
+					else {
+						_password = null;
+						passwordError.setForeground(Color.RED);
+						passwordError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");
+					}
+					
+					if(inputPhoneNumber.getText().matches("[0-9]") && inputPhoneNumber.getText().length() == 11) {
+						_phoneNumber = inputPhoneNumber.getText();
+						phoneNumberError.setText(" ");
+					}
+					else {
+						_phoneNumber = null;
+						phoneNumberError.setForeground(Color.RED);
+						phoneNumberError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");						
+					}
+					
 					_email = inputEmail.getText();
-					_birth =birth.getText();
-					_sex = sex.getText();
-					_adress = InputAdress.getText();				
-					Database.getInstance().createNewAccount(_id, _password, _phoneNumber, _email,  _birth,  _sex,  _adress);
-					frame.change("LogIn");
+					
+					if(birth.getText().matches("[0-9]") && birth.getText().length() == 6) {
+						_birth = birth.getText();
+						securityNumberError.setText(" ");
+					}
+					else {
+						_birth = null;
+						securityNumberError.setForeground(Color.RED);
+						securityNumberError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");				
+					}
+					
+					if(sex.getText().matches("[0-9]") && sex.getText().length() == 1) {
+						_sex = sex.getText();
+						securityNumberError.setText(" ");
+					}
+					else {
+						_sex = null;
+						securityNumberError.setForeground(Color.RED);
+						securityNumberError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");		
+					}
+					
+					if(InputAdress.getText().matches("[∞°-∆R]{2,4}Ω√\\s[∞°-∆R]{1,3}±∏\\s[∞°-∆R0-9]{1,10}")) {
+						_adress = InputAdress.getText();		
+						adressError.setText(" ");
+					}
+					else {
+						_adress = null;
+						adressError.setForeground(Color.RED);
+						adressError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");		
+					}
+					
+					if(_id != null && _password != null && _phoneNumber != null && _birth != null && _sex != null && _adress != null) {
+						Database.getInstance().createNewAccount(_id, _password, _phoneNumber, _email,  _birth,  _sex,  _adress);
+						frame.change("LogIn");
+					}					
+				}else {
+					paaswordConfirmError.setForeground(Color.RED);
+					paaswordConfirmError.setText("¥ŸΩ√¿‘∑¬«ÿ¡÷ººø‰");	
 				}
 				
 			}

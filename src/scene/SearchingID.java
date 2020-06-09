@@ -71,8 +71,7 @@ public class SearchingID extends JPanel {
 			}
 			
 		});
-		
-				
+						
 		inputPanel.setLayout(null);
 		
 		phoneNumber.setBounds(80, 100, 100, 40);
