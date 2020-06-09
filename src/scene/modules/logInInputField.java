@@ -16,8 +16,8 @@ public class LogInInputField extends JPanel{
 	
 	
 	public JPanel serchingAndCreatingAccount;
-	public JButton searchByID;
-	public JButton searchByPassword;
+	public JButton searchingID;
+	public JButton searchingPassword;
 	public JButton AccountCreation;
 	
 	public LogInInputField(SignUpFrame frame) {		
@@ -32,8 +32,8 @@ public class LogInInputField extends JPanel{
 		
 		//계정찾기, 회원가입 버튼 패널과 버튼 생성
 		serchingAndCreatingAccount = new JPanel();
-		searchByID = new JButton("아이디로 찾기");
-		searchByPassword = new JButton("비밀번호로 찾기");
+		searchingID = new JButton("아이디로 찾기");
+		searchingPassword = new JButton("비밀번호로 찾기");
 		AccountCreation = new JButton("회원가입");	
 		
 	    //PasswordField 고스트 텍스트 생성
@@ -99,16 +99,21 @@ public class LogInInputField extends JPanel{
 			}			
 		});
 		
-		//포커스시 안내말풍선 생성
+		searchingID.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+					frame.change("SearchingID");				
+			}			
+		});
 		
+		//포커스시 안내말풍선 생성		
 		inputID.setToolTipText("아이디를 입력하세요");
-		inputPassword.setToolTipText("비밀번호를 입력하세요");
-		
+		inputPassword.setToolTipText("비밀번호를 입력하세요");		
 		
 		//패널 설정
 		serchingAndCreatingAccount.setLayout(new FlowLayout());
-		serchingAndCreatingAccount.add(searchByID);
-		serchingAndCreatingAccount.add(searchByPassword);
+		serchingAndCreatingAccount.add(searchingID);
+		serchingAndCreatingAccount.add(searchingPassword);
 		serchingAndCreatingAccount.add(AccountCreation);
 		serchingAndCreatingAccount.setBackground(new Color(181,230,29));
 		

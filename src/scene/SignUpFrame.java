@@ -14,7 +14,7 @@ public class SignUpFrame extends JFrame {
 	public LogIn logIn;
 	public SignUp signUp;
 	public LogInScene logInScene;
-	
+	public SearchingID searchingID;
 	
 	public SignUpFrame(){
 		//database = new Database();
@@ -44,9 +44,7 @@ public class SignUpFrame extends JFrame {
 		else if(panelName.equals("SignUp")){
 			signUp = new SignUp(this);
 			
-			getContentPane().removeAll();
-           
-
+			getContentPane().removeAll(); 
 			getContentPane().add(signUp);
 			revalidate();
 			repaint();
@@ -55,9 +53,15 @@ public class SignUpFrame extends JFrame {
 			logInScene = new LogInScene(this);
 			
 			getContentPane().removeAll();
-           
-
 			getContentPane().add(logInScene);
+			revalidate();
+			repaint();
+		}
+		else if(panelName.equals("SearchingID")){
+			searchingID = new SearchingID(this);
+			
+			getContentPane().removeAll();
+			getContentPane().add(searchingID);
 			revalidate();
 			repaint();
 		}

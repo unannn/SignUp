@@ -103,7 +103,7 @@ public class Database {
 		return false;
 	}
 	
-	public boolean createNewAccount(String id,String password,String phoneNumber,String email, String birth, String sex, String adress) {		
+	public void createNewAccount(String id,String password,String phoneNumber,String email, String birth, String sex, String adress) {		
 		try {
 			PreparedStatement pstmt = null;
 
@@ -138,7 +138,51 @@ public class Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String findMyIdById(String phoneNumber) {
+		try {
+			Connection connection = null;
 
-		return false;
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+
+			java.sql.Statement statement = null;
+
+			ResultSet resultSet = null;
+
+			statement = connection.createStatement();
+
+			statement.execute("USE signup");
+			
+			resultSet = statement.executeQuery("select id from account where phonenumber ='" +phoneNumber+"'");
+
+			if (statement.execute("select id from account where phonenumber ='" +phoneNumber+"'")) {
+
+				resultSet = statement.getResultSet();
+								
+				String str = null;
+				
+				while(resultSet.next()) {
+					str = resultSet.getNString("id");
+					System.out.println(str);				
+				}
+				if(str != null) return str;
+			}
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());
+
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	
 	}
 }
