@@ -12,6 +12,8 @@ public class LogInInputField extends JPanel{
 	public JTextField inputID;
 	public JPasswordField inputPassword;
 	public JButton logInButton;
+	public JLabel errorSign;
+	
 	
 	public JPanel serchingAndCreatingAccount;
 	public JButton searchByID;
@@ -24,6 +26,7 @@ public class LogInInputField extends JPanel{
 		//아이디와 비밀번호, 로그인 버튼 생성
 		inputID = new JTextField("아이디를 입력하세요");
 		inputPassword = new JPasswordField();
+		errorSign = new JLabel();
 		logInButton = new JButton("로그인");
 		
 		
@@ -88,7 +91,10 @@ public class LogInInputField extends JPanel{
 					frame.change("LogInScene");
 				}
 				else {
-					frame.change("LogIn");
+					errorSign.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+					errorSign.setBackground(Color.BLUE);
+					errorSign.setForeground(Color.RED);
+					//frame.change("LogIn");
 				}
 			}			
 		});
@@ -111,8 +117,9 @@ public class LogInInputField extends JPanel{
 		//컴포넌트 위치 
 		inputID.setBounds(Constants.COMPONENT_X,Constants.COMPONENT_INIT_Y,Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
 		inputPassword.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y + Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
-		logInButton.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  + 2*Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
-		serchingAndCreatingAccount.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  +3*Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
+		errorSign.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  + 2*Constants.COMPONENT_GAP-30, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
+		logInButton.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  + 3*Constants.COMPONENT_GAP-30, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
+		serchingAndCreatingAccount.setBounds(Constants.COMPONENT_X, Constants.COMPONENT_INIT_Y  +4*Constants.COMPONENT_GAP, Constants.COMPONENT_WIDTH, Constants.COMPONENT_HEIGHT);
 			
 		
 		//글자수 제한		
@@ -122,6 +129,7 @@ public class LogInInputField extends JPanel{
 		add(inputID);
 		add(inputPassword);
 		add(logInButton);
+		add(errorSign);
 		add(serchingAndCreatingAccount);
 	}
 	

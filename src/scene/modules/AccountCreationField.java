@@ -1,10 +1,7 @@
 package scene.modules;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,8 +23,8 @@ public class AccountCreationField extends JPanel {
 	public JLabel passwordConfirm;
 	public JPasswordField inputPasswordConfirm;
 	
-	public JLabel phonNumber;
-	public JTextField inputPhonNumber;
+	public JLabel phoneNumber;
+	public JTextField inputPhoneNumber;
 	
 	public JLabel email;
 	public JTextField inputEmail;
@@ -42,9 +39,19 @@ public class AccountCreationField extends JPanel {
 	public JLabel adress;
 	public JTextField InputAdress;
 	
+	public String _id;
+	public String _password;
+	public String _phoneNumber;
+	public String _email;
+	public String _birth;
+	public String _sex;
+	public String _adress;
+
+	
+	
 	public JButton CreationButton;
 	
-	public AccountCreationField(SignUpFrame Frame) {
+	public AccountCreationField(SignUpFrame frame) {
 		
 		setLayout(null);
 		
@@ -57,8 +64,8 @@ public class AccountCreationField extends JPanel {
 		passwordConfirm = new JLabel("비밀번호 확인");
 		inputPasswordConfirm = new JPasswordField();
 		
-		phonNumber  = new JLabel("휴대폰 번호");
-		inputPhonNumber = new JTextField();
+		phoneNumber  = new JLabel("휴대폰 번호");
+		inputPhoneNumber = new JTextField();
 		
 		email  = new JLabel("이메일");
 		inputEmail = new JTextField();
@@ -83,8 +90,8 @@ public class AccountCreationField extends JPanel {
 		locateComponent(passwordConfirm,4);
 		locateComponent(inputPasswordConfirm,5);
 		
-		locateComponent(phonNumber,6);
-		locateComponent(inputPhonNumber,7);
+		locateComponent(phoneNumber,6);
+		locateComponent(inputPhoneNumber,7);
 		
 		locateComponent(email,8);
 		locateComponent(inputEmail,9);
@@ -101,7 +108,7 @@ public class AccountCreationField extends JPanel {
 		limitCharcaterNumber(inputID,Constants.ID_LIMIT);
 		limitCharcaterNumber(inputPassword,Constants.PASSWORD_LIMIT);
 		limitCharcaterNumber(inputPasswordConfirm,Constants.PASSWORD_LIMIT);
-		limitCharcaterNumber(inputPhonNumber,11);
+		limitCharcaterNumber(inputPhoneNumber,11);
 		limitCharcaterNumber(inputEmail,40);		
 		limitCharcaterNumber(InputAdress,40);
 
@@ -112,8 +119,8 @@ public class AccountCreationField extends JPanel {
 		add(inputPassword);
 		add(passwordConfirm);
 		add(inputPasswordConfirm);
-		add(phonNumber);
-		add(inputPhonNumber);
+		add(phoneNumber);
+		add(inputPhoneNumber);
 		add(email);
 		add(inputEmail);
 		add(socialNumber);
@@ -122,6 +129,27 @@ public class AccountCreationField extends JPanel {
 		add(InputAdress);		
 		
 		add(CreationButton);
+		
+		CreationButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println( inputPassword.getText() +" "+ inputPasswordConfirm.getText());
+				if(inputPassword.getText().contentEquals(inputPasswordConfirm.getText())) {
+					_id = inputID.getText();
+					_password = inputPassword.getText();
+					_phoneNumber = inputPhoneNumber.getText();
+					_email = inputEmail.getText();
+					_birth =birth.getText();
+					_sex = sex.getText();
+					_adress = InputAdress.getText();				
+					Database.getInstance().createNewAccount(_id, _password, _phoneNumber, _email,  _birth,  _sex,  _adress);
+					frame.change("LogIn");
+				}
+				
+			}
+			
+		});
 	}
 	
 	private void initializeSocialSecurityNumber() {

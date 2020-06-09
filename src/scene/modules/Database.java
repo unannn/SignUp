@@ -2,6 +2,7 @@ package scene.modules;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -87,6 +88,45 @@ public class Database {
 				if(count == 1)return true;
 				else return false;
 			}
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());
+
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	public boolean createNewAccount(String id,String password,String phoneNumber,String email, String birth, String sex, String adress) {		
+		try {
+			PreparedStatement pstmt = null;
+
+			Connection connection = null;
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+
+			String SQL = "insert into account(id, password, phoneNumber, email, birth,sex, adress) values(?, ?, ?, ?, ?, ?, ?)";
+			
+			pstmt = connection.prepareStatement(SQL);
+			
+			pstmt.setString(1, id); 
+			pstmt.setString(2, password); 
+			pstmt.setString(3, phoneNumber); 
+			pstmt.setString(4, email); 
+			pstmt.setString(5, birth); 
+			pstmt.setString(6, sex); 
+			pstmt.setString(7, adress); 
+			
+			int r = pstmt.executeUpdate(); 
+			System.out.println("º¯°æµÈ row : " + r);			
 
 		} catch (SQLException sqex) {
 
