@@ -139,6 +139,24 @@ public class LogInInputField extends JPanel{
 			}
 		});
 		
+		searchingPassword.addMouseListener(new MouseAdapter() {
+			@Override			
+			public void mouseClicked(MouseEvent e) {
+				frame.change("SearchingPassword");	
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.FIND_PW_FOCUS);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.FIND_PW);
+			}
+		});
+		
 		//포커스시 안내말풍선 생성		
 		inputID.setToolTipText("아이디를 입력하세요");
 		inputPassword.setToolTipText("비밀번호를 입력하세요");		

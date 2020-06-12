@@ -26,6 +26,9 @@ public class Constants {
 	public static final ImageIcon DELETE_ACCOUNT_FOCUS = new ImageIcon("src/deleteAccountButtonFocus.png");
 	
 	public static final ImageIcon BIG_MODIFYING = new ImageIcon("src/bigModifyingButton.png");
+	public static final ImageIcon BIG_DELETE_ACCOUNT = new ImageIcon("src/bigDeleteAccountButton.png");
+
+	
 	//·Î±×ÀÎ
 	public static final int COMPONENT_WIDTH = 350;
 	public static final int COMPONENT_HEIGHT = 40;

@@ -64,16 +64,16 @@ public class ModifyingInputField extends JPanel {
 		inputAdress.setText(priviousInfo[2]);
 		//ÁÂÇ¥¼³Á¤
 		
-		locateComponent(phoneNumber,6);
-		locateComponent(inputPhoneNumber,7);
+		locateComponent(phoneNumber,0);
+		locateComponent(inputPhoneNumber,1);
 		
-		locateComponent(email,8);
-		locateComponent(inputEmail,9);
+		locateComponent(email,2);
+		locateComponent(inputEmail,3);
 	
-		locateComponent(adress,12);
-		locateComponent(inputAdress,13);
+		locateComponent(adress,4);
+		locateComponent(inputAdress,5);
 		
-		locateComponent(CreationButton,15);
+		locateComponent(CreationButton,7);
 	
 		phoneNumberError.setBounds(210, Constants.ACCOUNTINPUT_Y + 6*Constants.ACCOUNTINPUT_GAP, 190, 40);
 		adressError.setBounds(250, Constants.ACCOUNTINPUT_Y + 12*Constants.ACCOUNTINPUT_GAP, 190, 40);
@@ -100,8 +100,7 @@ public class ModifyingInputField extends JPanel {
 		CreationButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String pattern = "[0-9a-zA-Z]{2,20}";
-			
+							
 					if(inputPhoneNumber.getText().matches("[0-9]{11}") && inputPhoneNumber.getText().length() == 11) {
 						if(!Database.getInstance().searchSamePhoneNumber(frame.nowLogInID, inputPhoneNumber.getText())) {
 							_phoneNumber = inputPhoneNumber.getText();
@@ -153,7 +152,7 @@ public class ModifyingInputField extends JPanel {
 	}	
 	
 	private void locateComponent(Component component, int order) {
-		if(order != 15)component.setBounds(Constants.ACCOUNTINPUT_X,Constants.ACCOUNTINPUT_Y + order*Constants.ACCOUNTINPUT_GAP,Constants.ACCOUNTINPUT_WIDTH, Constants.ACCOUNTINPUT_HEIGHT);
+		if(order != 7)component.setBounds(Constants.ACCOUNTINPUT_X,Constants.ACCOUNTINPUT_Y + order*Constants.ACCOUNTINPUT_GAP,Constants.ACCOUNTINPUT_WIDTH, Constants.ACCOUNTINPUT_HEIGHT);
 		else component.setBounds(Constants.ACCOUNTINPUT_X-10,Constants.ACCOUNTINPUT_Y + order*Constants.ACCOUNTINPUT_GAP - 10,Constants.ACCOUNTINPUT_WIDTH+10, Constants.ACCOUNTINPUT_HEIGHT+10);
 	}
 	

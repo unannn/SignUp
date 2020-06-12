@@ -20,7 +20,7 @@ public class ModifyingMyInfo extends JPanel {
 	public ModifyingMyInfo(SignUpFrame frame) {
 		title = new JLabel(Constants.TOP_TITLE);
 		inputField =  new scene.modules.ModifyingInputField(frame);
-		bottomBanner = new JLabel(Constants.BOTTOM_BANNER_SHORT);
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER);
 		
 		setLayout(new BorderLayout());		
 		

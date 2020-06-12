@@ -18,7 +18,7 @@ public class SignUpFrame extends JFrame {
 	public String nowLogInID;
 	public AccountDeletion accountDeletion;
 	public ModifyingMyInfo modifyingMyInfo;
-	
+	public SearchingPassword searchingPassword;
 	public SignUpFrame(){
 		nowLogInID = null;
 		logIn = new LogIn(this);
@@ -80,6 +80,14 @@ public class SignUpFrame extends JFrame {
 			
 			getContentPane().removeAll();
 			getContentPane().add(modifyingMyInfo);
+			revalidate();
+			repaint();
+		}
+		else if(panelName.equals("SearchingPassword")){
+			searchingPassword = new SearchingPassword(this);
+			
+			getContentPane().removeAll();
+			getContentPane().add(searchingPassword);
 			revalidate();
 			repaint();
 		}

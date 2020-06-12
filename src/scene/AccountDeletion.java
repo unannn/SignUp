@@ -23,8 +23,8 @@ public class AccountDeletion extends JPanel{
 	private JLabel password;
 	private RoundedPasswordField passwordInput;
 	private JLabel errorMessage;
-	private JButton deletionButton;
-	
+	private JLabel deletionButton;
+	private JLabel bottomBanner;
 	
 	public AccountDeletion(SignUpFrame frame) {
 		
@@ -33,8 +33,8 @@ public class AccountDeletion extends JPanel{
 		password = new JLabel("비밀번호 입력 : ");
 		passwordInput = new RoundedPasswordField(15);
 		errorMessage = new JLabel(" ");
-		deletionButton = new JButton("계정 삭제");
-		
+		deletionButton = new JLabel(Constants.BIG_DELETE_ACCOUNT);
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER);
 		inputPanel.setLayout(null);
 		inputPanel.add(password);
 		inputPanel.add(passwordInput);
@@ -67,10 +67,9 @@ public class AccountDeletion extends JPanel{
 		});
 
 		//버튼 이벤트
-		deletionButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
+		deletionButton.addMouseListener(new MouseAdapter() {
+			@Override			
+			public void mouseClicked(MouseEvent e) {
 				if(Database.getInstance().deleteAccount(frame.nowLogInID, passwordInput.getText()) == 1) {
 					frame.nowLogInID = null;
 					frame.change("LogIn");
@@ -80,6 +79,17 @@ public class AccountDeletion extends JPanel{
 					errorMessage.setText("비밀번호가 틀렸습니다");
 				}
 			}
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setText(" ");
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setText("");
+			}
 		});
 			
 		
@@ -87,5 +97,6 @@ public class AccountDeletion extends JPanel{
 		
 		add(title, BorderLayout.BEFORE_FIRST_LINE);
 		add(inputPanel, BorderLayout.CENTER);
+		add(bottomBanner,BorderLayout.AFTER_LAST_LINE);
 	}
 }
