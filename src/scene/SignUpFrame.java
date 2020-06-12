@@ -46,7 +46,7 @@ public class SignUpFrame extends JFrame {
 		else if(panelName.equals("SignUp")){
 			signUp = new SignUp(this);
 			
-			getContentPane().removeAll(); 
+			getContentPane().removeAll();
 			getContentPane().add(signUp);
 			revalidate();
 			repaint();

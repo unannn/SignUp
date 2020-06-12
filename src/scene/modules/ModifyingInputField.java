@@ -103,7 +103,7 @@ public class ModifyingInputField extends JPanel {
 				String pattern = "[0-9a-zA-Z]{2,20}";
 			
 					if(inputPhoneNumber.getText().matches("[0-9]{11}") && inputPhoneNumber.getText().length() == 11) {
-						if(!Database.getInstance().searchSameData("phonenumber", inputPhoneNumber.getText())) {
+						if(!Database.getInstance().searchSamePhoneNumber(frame.nowLogInID, inputPhoneNumber.getText())) {
 							_phoneNumber = inputPhoneNumber.getText();
 							phoneNumberError.setText(" ");
 						}
@@ -134,10 +134,9 @@ public class ModifyingInputField extends JPanel {
 					
 					if(_phoneNumber != null && _adress != null) {
 						System.out.println("asdf");
-						//Database.getInstance().createNewAccount( _phoneNumber, _email,_adress);
-						frame.change("LogIn");
-					}					
-						
+						Database.getInstance().updateModifyingInfo(frame.nowLogInID,_phoneNumber, _email,_adress);
+						frame.change("LogInScene");
+					}											
 			}
 
 			public void mouseEntered(MouseEvent e) {
