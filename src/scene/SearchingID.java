@@ -25,7 +25,7 @@ public class SearchingID extends JPanel {
 	private JLabel errorMessage;
 	private JLabel search;
 	private JLabel bottomBanner;
-	public SearchingID(SignUpFrame flame) {
+	public SearchingID(SignUpFrame frame) {
 		
 		title = new JLabel(Constants.TOP_TITLE);	
 		
@@ -41,7 +41,7 @@ public class SearchingID extends JPanel {
 		//타이틀 이펙트
 		title.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				flame.change("LogIn");
+				frame.change("LogIn");
 			}
 
 			public void mouseEntered(MouseEvent e) {
@@ -62,7 +62,7 @@ public class SearchingID extends JPanel {
 			@Override
 			
 			public void mouseClicked(MouseEvent e) {
-				String serchingId = Database.getInstance().findMyIdById(inputPhoneNumber.getText());
+				String serchingId = Database.getInstance().findMyIdByPhoneNumber(inputPhoneNumber.getText());
 				if(serchingId != null) {
 					errorMessage.setForeground(Color.BLACK);
 					errorMessage.setText("ID : " + serchingId);
@@ -73,6 +73,8 @@ public class SearchingID extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/buttonSound.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setText(" ");
 			}

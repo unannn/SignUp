@@ -53,7 +53,8 @@ public class AccountCreationField extends JPanel {
 	public JLabel passwordError;
 	public JLabel paaswordConfirmError;
 	public JLabel phoneNumberError;
-	public JLabel securityNumberError;
+	public JLabel birthError;
+	public JLabel sexError;
 	public JLabel adressError;
 	
 	
@@ -85,7 +86,8 @@ public class AccountCreationField extends JPanel {
 		
 		initializeSocialSecurityNumber();
 		socialNumber = new JLabel("ÁÖ¹Î¹øÈ£");
-		securityNumberError = new JLabel(" ");
+		birthError = new JLabel(" ");
+		sexError = new JLabel(" ");
 		
 		adress  = new JLabel("ÁÖ¼Ò(¡Ü¡Ü½Ã ¡Ü¡Ü±¸ ¡Ü¡Ü¡Ü)");
 		InputAdress = new RoundedJTextField(15);
@@ -123,7 +125,8 @@ public class AccountCreationField extends JPanel {
 		passwordError.setBounds(260, Constants.ACCOUNTINPUT_Y + 2*Constants.ACCOUNTINPUT_GAP, 190, 40);
 		paaswordConfirmError.setBounds(170, Constants.ACCOUNTINPUT_Y + 4*Constants.ACCOUNTINPUT_GAP, 190, 40);
 		phoneNumberError.setBounds(210, Constants.ACCOUNTINPUT_Y + 6*Constants.ACCOUNTINPUT_GAP, 190, 40);
-		securityNumberError.setBounds(140, Constants.ACCOUNTINPUT_Y + 10*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		birthError.setBounds(160, Constants.ACCOUNTINPUT_Y + 10*Constants.ACCOUNTINPUT_GAP, 190, 40);
+		sexError.setBounds(160, Constants.ACCOUNTINPUT_Y + 10*Constants.ACCOUNTINPUT_GAP, 190, 40);
 		adressError.setBounds(250, Constants.ACCOUNTINPUT_Y + 12*Constants.ACCOUNTINPUT_GAP, 190, 40);
 		
 		
@@ -155,7 +158,8 @@ public class AccountCreationField extends JPanel {
 		add(idError);
 		add(passwordError);
 		add(phoneNumberError);
-		add(securityNumberError);
+		add(birthError);
+		add(sexError);
 		add(adressError);
 		add(paaswordConfirmError);
 		
@@ -211,24 +215,25 @@ public class AccountCreationField extends JPanel {
 					
 					_email = inputEmail.getText();
 					
-					if(birth.getText().matches("[0-9]{6}") && birth.getText().length() == 6) {
+					if(birth.getText().matches("^\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|[3][01])") && birth.getText().length() == 6) {
+						System.out.println("asdf");
 						_birth = birth.getText();
-						securityNumberError.setText(" ");
+						birthError.setText(" ");
 					}
 					else {
 						_birth = null;
-						securityNumberError.setForeground(Color.RED);
-						securityNumberError.setText("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù");				
+						birthError.setForeground(Color.RED);
+						birthError.setText("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù");					
 					}
 					
-					if(sex.getText().matches("[0-9]") && sex.getText().length() == 1) {
+					if(sex.getText().matches("[1-4]") && sex.getText().length() == 1) {
 						_sex = sex.getText();
-						securityNumberError.setText(" ");
+						sexError.setText(" ");
 					}
 					else {
 						_sex = null;
-						securityNumberError.setForeground(Color.RED);
-						securityNumberError.setText("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù");		
+						sexError.setForeground(Color.RED);
+						sexError.setText("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù");		
 					}
 					
 					if(InputAdress.getText().matches("[°¡-ÆR]{2,4}½Ã\\s[°¡-ÆR]{1,3}±¸\\s[°¡-ÆR0-9]{1,10}")) {
@@ -242,7 +247,7 @@ public class AccountCreationField extends JPanel {
 					}
 					
 					if(_id != null && _password != null && _phoneNumber != null && _birth != null && _sex != null && _adress != null) {
-						System.out.println("asdf");
+						
 						Database.getInstance().createNewAccount(_id, _password, _phoneNumber, _email,  _birth,  _sex,  _adress);
 						frame.change("LogIn");
 					}					
@@ -253,6 +258,7 @@ public class AccountCreationField extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/buttonSound.wav");
 				JLabel j = (JLabel) e.getSource();
 				j.setText(" ");
 			}

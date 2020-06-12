@@ -71,9 +71,42 @@ public class LogInInputField extends JPanel{
 					inputPassword.setEchoChar ((char) 0);
 					inputPassword.setText("비밀번호를 입력하세요");
 				}
+			}			
+		});
+		inputPassword.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					boolean canLogIn = Database.getInstance().findIdAndPassword(inputID.getText(), inputPassword.getText().toString());
+					if(canLogIn) {
+						frame.nowLogInID = inputID.getText();
+						frame.change("LogInScene");
+					}
+					else {
+						errorSign.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+						errorSign.setBackground(Color.BLUE);
+						errorSign.setForeground(Color.RED);
+						
+					}
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		});
+		
 		
 		AccountCreation.addMouseListener(new MouseAdapter() {
 			@Override
@@ -83,6 +116,8 @@ public class LogInInputField extends JPanel{
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.SIGN_UP_SMALL_FOCUS);
 			}
@@ -110,6 +145,7 @@ public class LogInInputField extends JPanel{
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/buttonSound.wav");
 				JLabel j = (JLabel) e.getSource();
 				j.setText(" ");
 			}
@@ -128,6 +164,8 @@ public class LogInInputField extends JPanel{
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.FIND_ID_FOCUS);
 			}
@@ -146,6 +184,8 @@ public class LogInInputField extends JPanel{
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.FIND_PW_FOCUS);
 			}

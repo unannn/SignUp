@@ -16,7 +16,8 @@ public class Constants {
 	public static final ImageIcon FIND_PW_FOCUS = new ImageIcon("src/findPWFocus.png");
 	public static final ImageIcon SIGN_UP = new ImageIcon("src/SignUp.png");
 	public static final ImageIcon BIG_FIND_ID = new ImageIcon("src/bigFindID.png");
-	
+	public static final ImageIcon BIG_FIND_PW = new ImageIcon("src/bigFindPW.png");
+
 	public static final ImageIcon LOG_OUT = new ImageIcon("src/logOutButton.png");
 	public static final ImageIcon MODIFYING = new ImageIcon("src/modifyingButton.png");
 	public static final ImageIcon DELETE_ACCOUNT = new ImageIcon("src/deleteAccountButton.png");

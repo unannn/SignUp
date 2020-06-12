@@ -109,7 +109,7 @@ public class Database {
 		}
 	}
 
-	public String findMyIdById(String phoneNumber) {
+	public String findMyIdByPhoneNumber(String phoneNumber) {
 		try {
 			Connection connection = null;
 
@@ -369,5 +369,51 @@ public class Database {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public String findMyPasswordByPhoneNumber(String id, String phoneNumber, String email) {
+		try {
+			Connection connection = null;
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+
+			java.sql.Statement statement = null;
+
+			ResultSet resultSet = null;
+
+			statement = connection.createStatement();
+
+			statement.execute("USE signup");
+
+			resultSet = statement.executeQuery("select password from account where id = '"+id+"' AND phonenumber ='" + phoneNumber + "' AND email = '"+ email +"'");
+
+			if (statement.execute("select password from account where id = '"+id+"' AND phonenumber = '" + phoneNumber + "' AND email = '"+ email +"'")) {
+
+				resultSet = statement.getResultSet();
+
+				String str = null;
+
+				while (resultSet.next()) {
+					str = resultSet.getNString("password");
+					System.out.println(str);
+				}
+				
+				return str;
+			}
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());
+
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

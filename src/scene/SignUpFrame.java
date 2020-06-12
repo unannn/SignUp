@@ -1,7 +1,11 @@
 package scene;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 import scene.modules.Database;
@@ -91,5 +95,20 @@ public class SignUpFrame extends JFrame {
 			revalidate();
 			repaint();
 		}
+	}
+	public void playButtonSound(String fileName) {
+		 try
+	        {
+			 	System.out.println(System.getProperty("user.dir"));
+	            AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fileName));
+	            Clip clip = AudioSystem.getClip();
+	            clip.stop();
+	            clip.open(ais);
+	            clip.start();
+	        }
+	        catch (Exception ex)
+	        {
+	        	System.out.println(ex);
+	        }
 	}
 }

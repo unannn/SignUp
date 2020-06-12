@@ -23,6 +23,10 @@ public class LogInScene extends JPanel {
 	private JLabel bottomBanner;
 	
 	public LogInScene(SignUpFrame frame) {
+		
+		frame.playButtonSound("src/Â¥ÀÜ.wav");
+		
+		
 		title = new JLabel(Constants.TOP_TITLE);
 		welcome = new JLabel(Constants.WELCOME);
 		
@@ -46,6 +50,8 @@ public class LogInScene extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/buttonSound.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setText(" ");
 			}
@@ -64,6 +70,7 @@ public class LogInScene extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.DELETE_ACCOUNT_FOCUS);
 			}
@@ -87,6 +94,7 @@ public class LogInScene extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.LOG_OUT_FOCUS);
 			}
@@ -106,6 +114,7 @@ public class LogInScene extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/beep.wav");
 				JLabel j = (JLabel) e.getSource();
 				j.setIcon(Constants.MODIFYING_FOCUS);
 			}

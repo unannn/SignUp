@@ -139,6 +139,8 @@ public class ModifyingInputField extends JPanel {
 			}
 
 			public void mouseEntered(MouseEvent e) {
+				frame.playButtonSound("src/buttonSound.wav");
+
 				JLabel j = (JLabel) e.getSource();
 				j.setText(" ");
 			}
