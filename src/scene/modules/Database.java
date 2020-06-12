@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import utitlity.Constants;
+
 public class Database {
 	private static Database instance;  //½Ì±ÛÅÏ ±¸Çö
 	
@@ -14,48 +16,7 @@ public class Database {
         return instance;
     }
 	
-	public Database(){
-//		try {
-//			Connection connection = null;
-//
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			
-//			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
-//
-//			java.sql.Statement statement = null;
-//
-//			ResultSet resultSet = null;
-//
-//			statement = connection.createStatement();
-//
-//			statement.execute("USE signup");
-//			
-//			resultSet = statement.executeQuery("select * from account");
-//
-//			if (statement.execute("select * from account")) {
-//
-//				resultSet = statement.getResultSet();
-//			}
-//
-//			while (resultSet.next()) {
-//
-//				String str = resultSet.getNString("id");
-//
-//				System.out.println(str);
-//
-//			}
-//
-//		} catch (SQLException sqex) {
-//
-//			System.out.println("SQLException: " + sqex.getMessage());
-//
-//			System.out.println("SQLState: " + sqex.getSQLState());
-//
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-	}
+	public Database(){}
 	
 	public boolean findIdAndPassword(String id,String password) {		
 		try {
@@ -63,7 +24,7 @@ public class Database {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
 
 			java.sql.Statement statement = null;
 
@@ -84,7 +45,7 @@ public class Database {
 				while(resultSet.next()) {
 					++count;					
 				}
-				System.out.println(count + " " + id + " " + password);
+				
 				if(count == 1)return true;
 				else return false;
 			}
@@ -111,7 +72,7 @@ public class Database {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
 
 			String SQL = "insert into account(id, password, phoneNumber, email, birth,sex, adress) values(?, ?, ?, ?, ?, ?, ?)";
 			
@@ -146,7 +107,7 @@ public class Database {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
 
 			java.sql.Statement statement = null;
 
@@ -190,7 +151,7 @@ public class Database {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/signup?characterEncoding=UTF-8&serverTimezone=UTC", "root", "0000");
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
 
 			java.sql.Statement statement = null;
 
@@ -226,5 +187,89 @@ public class Database {
 			e.printStackTrace();
 		}
 		return false;	
+	}
+	
+	public int deleteAccount(String id,String password){
+		
+		try {
+			Connection connection = null;
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+
+			java.sql.Statement statement = null;
+
+			ResultSet resultSet = null;
+
+			statement = connection.createStatement();
+
+			statement.execute("USE signup");			
+			
+			String SQL = "delete from account where id = ? AND password = ?";
+			
+			PreparedStatement pstmt = connection.prepareStatement(SQL);
+			
+			pstmt.setString(1, id); 
+			pstmt.setString(2, password); 
+			
+			int r = pstmt.executeUpdate();
+
+			return r;
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());			
+			System.out.println("SQLState: " + sqex.getSQLState());
+			return 0;	
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;	
+		}		
+	}
+	public String[] bringModifyingInfo(String id){
+		
+		String[] modifyingInfo = new String[3];
+		
+		try {
+			Connection connection = null;
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection(Constants.URL, Constants.USER, Constants.PASSWORD);
+
+			java.sql.Statement statement = null;
+
+			ResultSet resultSet = null;
+
+			statement = connection.createStatement();
+
+			statement.execute("USE signup");
+			
+			resultSet = statement.executeQuery("select phonenumber, email, adress from account where id ='" +id+"'");
+
+			if (statement.execute("select phonenumber, email, adress from account where id ='" +id+"'")) {
+
+				resultSet = statement.getResultSet();
+								
+				for(int element = 0;element < modifyingInfo.length;element++) {
+					modifyingInfo[element] = resultSet.getString(element);
+				}
+				
+			}
+
+		} catch (SQLException sqex) {
+
+			System.out.println("SQLException: " + sqex.getMessage());
+
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return modifyingInfo;	
 	}
 }

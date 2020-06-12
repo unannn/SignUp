@@ -16,18 +16,21 @@ public class LogInScene extends JPanel {
 	private JLabel welcome;
 	
 	private JPanel buttonPanel;
-	private JButton logOut;
-	private JButton modyfingMyInfo;
-	private JButton accountDeletion;
+	private JLabel logOut;
+	private JLabel modyfingMyInfo;
+	private JLabel accountDeletion;
 	
-	public LogInScene(SignUpFrame flame) {
+	private JLabel bottomBanner;
+	
+	public LogInScene(SignUpFrame frame) {
 		title = new JLabel(Constants.TOP_TITLE);
 		welcome = new JLabel(Constants.WELCOME);
 		
 		buttonPanel = new JPanel();
-		logOut = new JButton("로그아웃");
-		modyfingMyInfo = new JButton("내 정보 수정");
-		accountDeletion = new JButton("계정 삭제");
+		logOut = new JLabel(Constants.LOG_OUT);
+		modyfingMyInfo = new JLabel(Constants.MODIFYING);
+		accountDeletion = new JLabel(Constants.DELETE_ACCOUNT);
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER);
 		
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(logOut);
@@ -39,7 +42,7 @@ public class LogInScene extends JPanel {
 		//타이틀 이펙트
 		title.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				flame.change("LogInScene");
+				frame.change("LogInScene");
 			}
 
 			public void mouseEntered(MouseEvent e) {
@@ -54,23 +57,71 @@ public class LogInScene extends JPanel {
 			}
 		});
 		
+		accountDeletion.addMouseListener(new MouseAdapter() {
+			@Override			
+			public void mouseClicked(MouseEvent e) {
+				frame.change("AccountDeletion");
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.DELETE_ACCOUNT_FOCUS);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.DELETE_ACCOUNT);
+			}
+		});
+		
 		
 		//버튼 이벤트
 		
-		logOut.addActionListener(new ActionListener() {
+		logOut.addMouseListener(new MouseAdapter() {
+
+			@Override			
+			public void mouseClicked(MouseEvent e) {
+				frame.nowLogInID = null;
+				frame.change("LogIn");
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.LOG_OUT_FOCUS);
+			}
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				flame.change("LogIn");
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.LOG_OUT);
 			}
-			
 		});
 		
+		modyfingMyInfo.addMouseListener(new MouseAdapter() {
+
+			@Override			
+			public void mouseClicked(MouseEvent e) {
+				frame.change("ModifyingMyInfo");
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.MODIFYING_FOCUS);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setIcon(Constants.MODIFYING);
+			}
+		});
 		
 		this.setBackground(new Color(181, 230, 29));
 		
 		add(title, BorderLayout.BEFORE_FIRST_LINE);
 		add(welcome, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
+		buttonPanel.add(bottomBanner);
 	}
 }

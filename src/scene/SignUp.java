@@ -15,10 +15,13 @@ public class SignUp extends JPanel {
 	
 	private JLabel title;
 	private scene.modules.AccountCreationField inputField;
+	private JLabel bottomBanner;
 	
 	public SignUp(SignUpFrame flame) {
 		title = new JLabel(Constants.TOP_TITLE);
 		inputField =  new scene.modules.AccountCreationField(flame);
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER_SHORT);
+		
 		setLayout(new BorderLayout());		
 		
 		//타이틀 이펙트
@@ -41,7 +44,8 @@ public class SignUp extends JPanel {
 
 		this.setBackground(new Color(181, 230, 29));
 
-		add(title,BorderLayout.BEFORE_FIRST_LINE);
-		 add(inputField,BorderLayout.CENTER);	
+		add(title,BorderLayout.BEFORE_FIRST_LINE);		
+		add(inputField,BorderLayout.CENTER);
+		add(bottomBanner,BorderLayout.AFTER_LAST_LINE);
 	}
 }

@@ -15,18 +15,20 @@ public class SignUpFrame extends JFrame {
 	public SignUp signUp;
 	public LogInScene logInScene;
 	public SearchingID searchingID;
+	public String nowLogInID;
+	public AccountDeletion accountDeletion;
+	public ModifyingMyInfo modifyingMyInfo;
 	
 	public SignUpFrame(){
-		//database = new Database();
-		
+		nowLogInID = null;
 		logIn = new LogIn(this);
-		//signUp = new SignUp();
 		setLayout(new BorderLayout());
 				
 		add(logIn,BorderLayout.CENTER);
 			
 		setVisible(true);
 		setSize(new Dimension(540,800));
+		setResizable(false);
 		this.setMinimumSize(new Dimension(540,800));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
@@ -62,6 +64,22 @@ public class SignUpFrame extends JFrame {
 			
 			getContentPane().removeAll();
 			getContentPane().add(searchingID);
+			revalidate();
+			repaint();
+		}
+		else if(panelName.equals("AccountDeletion")){
+			accountDeletion = new AccountDeletion(this);
+			
+			getContentPane().removeAll();
+			getContentPane().add(accountDeletion);
+			revalidate();
+			repaint();
+		}
+		else if(panelName.equals("ModifyingMyInfo")){
+			modifyingMyInfo = new ModifyingMyInfo(this);
+			
+			getContentPane().removeAll();
+			getContentPane().add(modifyingMyInfo);
 			revalidate();
 			repaint();
 		}

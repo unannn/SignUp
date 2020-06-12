@@ -16,10 +16,12 @@ public class LogIn extends JPanel {
 
 	private JLabel title;
 	private scene.modules.LogInInputField inputField;
+	private JLabel bottomBanner;
 
 	public LogIn(SignUpFrame flame) {
 		title = new JLabel(Constants.TOP_TITLE);
 		inputField = new scene.modules.LogInInputField(flame);
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER);
 		setLayout(new BorderLayout());		
 		
 		//타이틀 이펙트
@@ -44,6 +46,7 @@ public class LogIn extends JPanel {
 
 		add(title, BorderLayout.BEFORE_FIRST_LINE);
 		add(inputField, BorderLayout.CENTER);
+		add(bottomBanner, BorderLayout.AFTER_LAST_LINE);
 	}
 
 }

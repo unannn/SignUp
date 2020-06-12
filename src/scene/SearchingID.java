@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 import utitlity.Constants;
 import javax.swing.*;
 
-import scene.modules.Database;
+import scene.modules.*;
 
 public class SearchingID extends JPanel {
 	
@@ -21,19 +21,20 @@ public class SearchingID extends JPanel {
 	
 	private JPanel inputPanel;
 	private JLabel phoneNumber;
-	private JTextField inputPhoneNumber;
+	private RoundedJTextField inputPhoneNumber;
 	private JLabel errorMessage;
-	private JButton search;
-	
+	private JLabel search;
+	private JLabel bottomBanner;
 	public SearchingID(SignUpFrame flame) {
 		
 		title = new JLabel(Constants.TOP_TITLE);	
 		
 		inputPanel = new JPanel();
 		phoneNumber = new JLabel("휴대 번호 : ");
-		inputPhoneNumber = new JTextField();
+		inputPhoneNumber = new RoundedJTextField(15);
 		errorMessage = new JLabel(" ");
-		search = new JButton("아이디 찾기");		
+		search = new JLabel(Constants.BIG_FIND_ID);		
+		bottomBanner = new JLabel(Constants.BOTTOM_BANNER);
 		
 		setLayout(new BorderLayout());		
 		
@@ -57,9 +58,10 @@ public class SearchingID extends JPanel {
 		
 		
 		//버튼 이벤트
-		search.addActionListener(new ActionListener() {
+		search.addMouseListener(new MouseAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			
+			public void mouseClicked(MouseEvent e) {
 				String serchingId = Database.getInstance().findMyIdById(inputPhoneNumber.getText());
 				if(serchingId != null) {
 					errorMessage.setForeground(Color.BLACK);
@@ -69,15 +71,25 @@ public class SearchingID extends JPanel {
 					errorMessage.setText("가입된 아이디가 없습니다");
 				}			
 			}
-			
+
+			public void mouseEntered(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setText(" ");
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JLabel j = (JLabel) e.getSource();
+				j.setText("");
+			}
 		});
 						
 		inputPanel.setLayout(null);
 		
-		phoneNumber.setBounds(80, 100, 100, 40);
+		phoneNumber.setBounds(90, 100, 100, 40);
 		inputPhoneNumber.setBounds(180, 100, 250, 40);
-		errorMessage.setBounds(80,140,350,40);
-		search.setBounds(80, 200, 350, 40);
+		errorMessage.setBounds(90,140,350,40);
+		search.setBounds(90, 200, 350, 40);
 		
 		errorMessage.setBackground(new Color(181, 230, 29));
 		errorMessage.setForeground(Color.RED);
@@ -95,6 +107,7 @@ public class SearchingID extends JPanel {
 		
 		add(title, BorderLayout.BEFORE_FIRST_LINE);		
 		add(inputPanel,BorderLayout.CENTER);
+		add(bottomBanner,BorderLayout.AFTER_LAST_LINE);
 		
 	}
 	
